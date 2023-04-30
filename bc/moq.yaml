@@ -1,0 +1,159 @@
+syntax: 0.1.0
+engine: 
+  kind: PISA
+  flags: []
+
+elements: 
+  - ptr: 0
+    kind: state 
+    data: 
+      kind: persistent
+      fields: 
+        - slot: 0
+          label: assetList
+          type: "map[uint64]string"
+        - slot: 1
+          label: counter
+          type: uint64
+        - slot: 2
+          label: capacity
+          type: uint64
+  
+  - ptr: 1
+    kind: constant
+    data: 
+      type: uint64
+      value: 0x0300
+      
+  - ptr: 2
+    kind: constant
+    data: 
+      type: uint64
+      value: 0x0301
+
+  - ptr: 3
+    kind: constant
+    data: 
+      type: string
+      value: 0x064c696d69742045786861757374656421
+  
+  - ptr: 4
+    kind: routine
+    deps: [0,1]
+    data: 
+      name: MOQ!
+      kind: deployer
+      accepts :
+        - slot : 0
+          label: capacity
+          type : uint64
+      executes: 
+        bin: [
+          0x04, 0x00, 0x00,
+          0x81, 0x00, 0x02,
+          0x11, 0x00, 0x01,
+          0x10, 0x00, 0x00,
+          0x81, 0x00, 0x01,
+        ]
+        
+  - ptr: 5
+    kind: routine
+    deps: [0,2,3]
+    data: 
+      name: AddAsset!
+      kind: invokable
+      accepts :
+        - slot : 0
+          label: assetID
+          type : string
+      executes: 
+        bin: [
+          0x80, 0x00, 0x01,               # $0 = p.storage::counter
+          0x80, 0x01, 0x02,               # $1 = p.storage::capacity
+          0x46, 0x02, 0x01, 0x00,         # $2 = $0 == $1
+          0x11, 0x03, 0x09,               # $3 = PTR(0x09)
+          0x62, 0x02, 0x02,               # $2 = !$2
+          0x03, 0x03, 0x02,               # if $2 -> jump to line $3
+          0x11, 0x00, 0x03,               # ldptr1 $0 0x3
+          0x10, 0x00, 0x00,               # const $0 $0
+          0x41, 0x00,                     # throw $0
+          0x01,                           # Jump Destination (line 0x09)
+          0x11, 0x01, 0x02,               # $1 = PTR1
+          0x10, 0x01, 0x01,               # $1 = &1
+          0x80, 0x02, 0x00,               # $2 = p.storage::assetList
+          0x04, 0x03, 0x00,               # $3 = accepts::assetID
+          0x54, 0x02, 0x00, 0x03,         # $2[$0] = $3
+          0x81, 0x02, 0x00,               # p.storage::assetList = $2
+          0x65, 0x03, 0x00, 0x01,         # $2 = $0 + $1
+          0x81, 0x03, 0x01,               # p.storage::counter = $2
+        ]
+
+  - ptr: 6
+    kind: routine
+    deps: [0]
+    data: 
+      name: GetAssetAtIndex
+      kind: invokable
+      accepts :
+        - slot : 0
+          label: assetIndex
+          type : uint64
+      returns: 
+        - slot: 0
+          label: assetName
+          type: string
+      executes: 
+        bin: [
+          0x80, 0x00, 0x00,
+          0x04, 0x01, 0x00,
+          0x53, 0x02, 0x00, 0x01,
+          0x05, 0x02, 0x00,
+        ]
+
+  - ptr: 7
+    kind: routine
+    deps: [0]
+    data: 
+      name: Capacity
+      kind: invokable
+      returns: 
+        - slot: 0
+          label: counter
+          type: uint64
+      executes: 
+        bin: [
+          0x80, 0x00, 0x02,
+          0x05, 0x00, 0x00,
+        ]
+  
+  - ptr: 8
+    kind: routine
+    deps: [0]
+    data: 
+      name: Counter
+      kind: invokable
+      returns: 
+        - slot: 0
+          label: counter
+          type: uint64
+      executes: 
+        bin: [
+          0x80, 0x00, 0x01,
+          0x05, 0x00, 0x00,
+        ]
+
+  - ptr: 9
+    kind: routine
+    deps: [0]
+    data: 
+      name: UpdateCapacity!
+      kind: invokable
+      accepts: 
+        - slot: 0
+          label: capacity
+          type: uint64
+      executes: 
+        bin: [
+          0x04, 0x00, 0x00,
+          0x81, 0x00, 0x02,
+        ]
