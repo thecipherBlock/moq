@@ -17,5 +17,12 @@
     "coco"
   ],
   "author": "thecipherBlock",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "envfile": "^6.18.0",
+    "moi.js": "file:/.../moi.js"
+  },
+  "devDependencies": {
+    "yargs": "^17.7.2"
+  }
 }

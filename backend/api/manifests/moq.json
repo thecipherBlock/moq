@@ -1,0 +1,326 @@
+{
+    "syntax": "0.1.0",
+    "engine": {
+        "kind": "PISA",
+        "flags": []
+    },
+    "elements": [
+        {
+            "ptr": 0,
+            "deps": null,
+            "kind": "state",
+            "data": {
+                "kind": "persistent",
+                "fields": [
+                    {
+                        "slot": 0,
+                        "label": "assetList",
+                        "type": "map[uint64]string"
+                    },
+                    {
+                        "slot": 1,
+                        "label": "counter",
+                        "type": "uint64"
+                    },
+                    {
+                        "slot": 2,
+                        "label": "capacity",
+                        "type": "uint64"
+                    }
+                ]
+            }
+        },
+        {
+            "ptr": 1,
+            "deps": null,
+            "kind": "constant",
+            "data": {
+                "type": "uint64",
+                "value": "0x0300"
+            }
+        },
+        {
+            "ptr": 2,
+            "deps": null,
+            "kind": "constant",
+            "data": {
+                "type": "uint64",
+                "value": "0x0301"
+            }
+        },
+        {
+            "ptr": 3,
+            "deps": null,
+            "kind": "constant",
+            "data": {
+                "type": "string",
+                "value": "0x064c696d69742045786861757374656421"
+            }
+        },
+        {
+            "ptr": 4,
+            "deps": [
+                0,
+                1
+            ],
+            "kind": "routine",
+            "data": {
+                "name": "MOQ!",
+                "kind": "deployer",
+                "accepts": [
+                    {
+                        "slot": 0,
+                        "label": "capacity",
+                        "type": "uint64"
+                    }
+                ],
+                "returns": null,
+                "catches": null,
+                "executes": {
+                    "bin": [
+                        4,
+                        0,
+                        0,
+                        129,
+                        0,
+                        2,
+                        17,
+                        0,
+                        1,
+                        16,
+                        0,
+                        0,
+                        129,
+                        0,
+                        1
+                    ],
+                    "hex": "",
+                    "asm": null
+                }
+            }
+        },
+        {
+            "ptr": 5,
+            "deps": [
+                0,
+                2,
+                3
+            ],
+            "kind": "routine",
+            "data": {
+                "name": "AddAsset!",
+                "kind": "invokable",
+                "accepts": [
+                    {
+                        "slot": 0,
+                        "label": "assetID",
+                        "type": "string"
+                    }
+                ],
+                "returns": null,
+                "catches": null,
+                "executes": {
+                    "bin": [
+                        128,
+                        0,
+                        1,
+                        128,
+                        1,
+                        2,
+                        70,
+                        2,
+                        1,
+                        0,
+                        17,
+                        3,
+                        9,
+                        98,
+                        2,
+                        2,
+                        3,
+                        3,
+                        2,
+                        17,
+                        0,
+                        3,
+                        16,
+                        0,
+                        0,
+                        65,
+                        0,
+                        1,
+                        17,
+                        1,
+                        2,
+                        16,
+                        1,
+                        1,
+                        128,
+                        2,
+                        0,
+                        4,
+                        3,
+                        0,
+                        84,
+                        2,
+                        0,
+                        3,
+                        129,
+                        2,
+                        0,
+                        101,
+                        3,
+                        0,
+                        1,
+                        129,
+                        3,
+                        1
+                    ],
+                    "hex": "",
+                    "asm": null
+                }
+            }
+        },
+        {
+            "ptr": 6,
+            "deps": [
+                0
+            ],
+            "kind": "routine",
+            "data": {
+                "name": "GetAssetAtIndex",
+                "kind": "invokable",
+                "accepts": [
+                    {
+                        "slot": 0,
+                        "label": "assetIndex",
+                        "type": "uint64"
+                    }
+                ],
+                "returns": [
+                    {
+                        "slot": 0,
+                        "label": "assetName",
+                        "type": "string"
+                    }
+                ],
+                "catches": null,
+                "executes": {
+                    "bin": [
+                        128,
+                        0,
+                        0,
+                        4,
+                        1,
+                        0,
+                        83,
+                        2,
+                        0,
+                        1,
+                        5,
+                        2,
+                        0
+                    ],
+                    "hex": "",
+                    "asm": null
+                }
+            }
+        },
+        {
+            "ptr": 7,
+            "deps": [
+                0
+            ],
+            "kind": "routine",
+            "data": {
+                "name": "Capacity",
+                "kind": "invokable",
+                "accepts": null,
+                "returns": [
+                    {
+                        "slot": 0,
+                        "label": "counter",
+                        "type": "uint64"
+                    }
+                ],
+                "catches": null,
+                "executes": {
+                    "bin": [
+                        128,
+                        0,
+                        2,
+                        5,
+                        0,
+                        0
+                    ],
+                    "hex": "",
+                    "asm": null
+                }
+            }
+        },
+        {
+            "ptr": 8,
+            "deps": [
+                0
+            ],
+            "kind": "routine",
+            "data": {
+                "name": "Counter",
+                "kind": "invokable",
+                "accepts": null,
+                "returns": [
+                    {
+                        "slot": 0,
+                        "label": "counter",
+                        "type": "uint64"
+                    }
+                ],
+                "catches": null,
+                "executes": {
+                    "bin": [
+                        128,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0
+                    ],
+                    "hex": "",
+                    "asm": null
+                }
+            }
+        },
+        {
+            "ptr": 9,
+            "deps": [
+                0
+            ],
+            "kind": "routine",
+            "data": {
+                "name": "UpdateCapacity!",
+                "kind": "invokable",
+                "accepts": [
+                    {
+                        "slot": 0,
+                        "label": "capacity",
+                        "type": "uint64"
+                    }
+                ],
+                "returns": null,
+                "catches": null,
+                "executes": {
+                    "bin": [
+                        4,
+                        0,
+                        0,
+                        129,
+                        0,
+                        2
+                    ],
+                    "hex": "",
+                    "asm": null
+                }
+            }
+        }
+    ]
+}
